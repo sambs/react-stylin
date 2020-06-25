@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Box 1`] = `
+<div
+  style={
+    Object {
+      "animation": "whatever",
+      "border": "1px solid red",
+      "fontSize": "24px",
+      "paddingTop": "8px",
+    }
+  }
+>
+  Hell Yeah!
+</div>
+`;
+
+exports[`Custom Element 1`] = `
+<div
+  role="alert"
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+>
+  Uh Oh!
+</div>
+`;
