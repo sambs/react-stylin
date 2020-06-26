@@ -4,7 +4,6 @@ exports[`Box 1`] = `
 <div
   style={
     Object {
-      "animation": "whatever",
       "border": "1px solid red",
       "fontSize": "24px",
       "paddingTop": "8px",
@@ -15,7 +14,7 @@ exports[`Box 1`] = `
 </div>
 `;
 
-exports[`Custom Element 1`] = `
+exports[`Custom Element with default props 1`] = `
 <div
   role="alert"
   style={
@@ -25,5 +24,41 @@ exports[`Custom Element 1`] = `
   }
 >
   Uh Oh!
+</div>
+`;
+
+exports[`Custom Element with style props 1`] = `
+<div
+  style={
+    Object {
+      "fontSize": "16px",
+    }
+  }
+>
+  Hey there!
+</div>
+`;
+
+exports[`Custom Element with style props 2`] = `
+<div
+  style={
+    Object {
+      "fontSize": "12px",
+    }
+  }
+>
+  Hey there!
+</div>
+`;
+
+exports[`Custom Element with style props 3`] = `
+<div
+  style={
+    Object {
+      "fontSize": "15px",
+    }
+  }
+>
+  Hey there!
 </div>
 `;

@@ -20,7 +20,7 @@ export const theme = {
       fontSize: '16px',
     },
     sm: {
-      fontSize: '16px',
+      fontSize: '12px',
     },
   },
 }
@@ -59,11 +59,10 @@ test('Box', () => {
   const component = createRendererWithContext(
     <Box
       as="div"
-      styles={(theme) => ({
+      styles={({ theme }) => ({
         ...theme.text.lg,
         border: '1px solid red',
         paddingTop: theme.size[3],
-        animation: 'whatever',
       })}
     >
       Hell Yeah!
@@ -77,13 +76,42 @@ const Alert = createStylinElement({
   element: 'div',
   displayName: 'Alert',
   defaultProps: { role: 'alert' },
-  defaultStyle: {
+  defaultStyles: ({ theme }) => ({
     background: theme.colors.primary,
-  },
+  }),
 })
 
-test('Custom Element', () => {
+test('Custom Element with default props', () => {
   const component = createRendererWithContext(<Alert>Uh Oh!</Alert>)
   let tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+type TextStyleProps = {
+  size: 'sm' | 'md' | 'lg'
+}
+
+const Text = createStylinElement<'div', TextStyleProps>({
+  element: 'div',
+  displayName: 'Text',
+  defaultStyleProps: {
+    size: 'md',
+  },
+  defaultStyles: ({ theme, props }) => theme.text[props.size],
+})
+
+test('Custom Element with style props', () => {
+  let component = createRendererWithContext(<Text>Hey there!</Text>)
+  let tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+
+  component = createRendererWithContext(<Text size="sm">Hey there!</Text>)
+  tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+
+  component = createRendererWithContext(
+    <Text styles={() => ({ fontSize: '15px' })}>Hey there!</Text>
+  )
+  tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
