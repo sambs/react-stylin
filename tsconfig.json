@@ -1,23 +1,8 @@
 {
-  "compilerOptions": {
-    "incremental": true,
-    "outDir": "./stylin/dist",
-    "declaration": true,
-    "module": "commonjs",
-    "noImplicitReturns": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noEmitOnError": false,
-    "strict": true,
-    "target": "es5",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "stripInternal": true,
-    "lib": ["es2015"],
-    "jsx": "react"
-  },
-  "include": ["./stylin/src/**/*"]
+  "files": [],
+  "references": [
+    { "path": "./components" },
+    { "path": "./example" },
+    { "path": "./stylin" }
+  ]
 }

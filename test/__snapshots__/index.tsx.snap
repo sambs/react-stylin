@@ -1,19 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Box 1`] = `
-<div
-  style={
-    Object {
-      "border": "1px solid red",
-      "fontSize": "24px",
-      "paddingTop": "8px",
-    }
-  }
->
-  Hell Yeah!
-</div>
-`;
-
 exports[`Custom Element with default props 1`] = `
 <div
   role="alert"

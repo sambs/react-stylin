@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    "lib": ["dom", "es2015"],
+    "rootDir": "./src",
+    "outDir": "./build"
+  },
+  "include": ["./src/**/*"],
+  "references": [{ "path": "../components" }, { "path": "../stylin" }]
+}

@@ -1,31 +1,23 @@
 import * as React from 'react'
 
-export interface Theme {}
-
-export interface Context {}
-
-export const ThemeContext = React.createContext<Theme>({})
-export const ContextContext = React.createContext<Context>({})
-
-export type StyleResolver<P extends StyleProps> = (params: {
-  theme: Theme
-  context: Context
+export type StyleResolver<T, P extends StyleProps> = (params: {
+  theme: T
   props: P
   defaults: React.CSSProperties
 }) => React.CSSProperties
 
-export function useStylin<P extends StyleProps>(
+export function useStylin<T, P extends StyleProps>(
+  themeContext: React.Context<T>,
   props: P,
-  ...resolvers: Array<StyleResolver<P> | undefined>
+  ...resolvers: Array<StyleResolver<T, P> | undefined>
 ) {
-  const theme = React.useContext(ThemeContext)
-  const context = React.useContext(ContextContext)
+  const theme = React.useContext(themeContext)
 
   let style: React.CSSProperties = {}
 
   for (const resolver of resolvers) {
     if (resolver) {
-      style = resolver({ theme, context, props, defaults: style })
+      style = resolver({ theme, props, defaults: style })
     }
   }
   return style
@@ -37,21 +29,28 @@ type StyleProps = { [prop: string]: any }
 
 type StylinElementProps<
   E extends ElementName,
+  T,
   P extends StyleProps
 > = JSX.IntrinsicElements[E] & {
-  styles?: StyleResolver<P>
+  styles?: StyleResolver<T, P>
 } & Partial<P>
 
-type CreateStylinElementParams<E extends ElementName, P extends StyleProps> = {
+type CreateStylinElementParams<
+  E extends ElementName,
+  T,
+  P extends StyleProps
+> = {
   defaultProps?: JSX.IntrinsicElements[E]
-  defaultStyles?: StyleResolver<P>
+  defaultStyles?: StyleResolver<T, P>
   defaultStyleProps?: P
   displayName?: string
   element: E
+  themeContext: React.Context<T>
 }
 
 export const createStylinElement = <
   E extends ElementName,
+  T,
   P extends StyleProps
 >({
   defaultProps,
@@ -59,8 +58,9 @@ export const createStylinElement = <
   defaultStyleProps,
   displayName = 'Element',
   element,
-}: CreateStylinElementParams<E, P>) => {
-  const component = (props: StylinElementProps<E, P>) => {
+  themeContext,
+}: CreateStylinElementParams<E, T, P>) => {
+  const component: React.FC<StylinElementProps<E, T, P>> = (props) => {
     const styleProps: Partial<P> = {}
     const elemProps: JSX.IntrinsicElements[E] = {}
 
@@ -80,6 +80,7 @@ export const createStylinElement = <
     }
 
     const style = useStylin(
+      themeContext,
       styleProps as Required<P>,
       defaultStyles,
       props.styles
@@ -95,18 +96,4 @@ export const createStylinElement = <
   component.displayName = displayName
 
   return component
-}
-
-type BoxProps<E extends ElementName> = {
-  as: E
-  styles?: StyleResolver<{}>
-} & JSX.IntrinsicElements[E]
-
-export function Box<E extends ElementName>({
-  as,
-  styles,
-  ...props
-}: BoxProps<E>) {
-  const style = useStylin({}, styles)
-  return React.createElement(as, { style, ...props })
 }
