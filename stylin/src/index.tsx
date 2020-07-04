@@ -2,13 +2,13 @@ import * as React from 'react'
 
 export type StyleResolver<T, P extends StyleProps> = (params: {
   theme: T
-  props: P
+  props: Required<P>
   defaults: React.CSSProperties
 }) => React.CSSProperties
 
 export function useStylin<T, P extends StyleProps>(
   themeContext: React.Context<T>,
-  props: P,
+  props: Required<P>,
   ...resolvers: Array<StyleResolver<T, P> | undefined>
 ) {
   const theme = React.useContext(themeContext)
