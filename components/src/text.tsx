@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleResolver, useStylin } from 'stylin'
 import { Theme, ThemeContext } from './theme'
+import { px } from './utils'
 
 type TextStyleProps = {
   size?: keyof Theme['text']
@@ -11,16 +12,14 @@ type TextProps = TextStyleProps & {
   styles?: StyleResolver<Theme, TextStyleProps>
 }
 
-const px = (i: number) => `${i}px`
-
 const defaultTextStyles: StyleResolver<Theme, TextStyleProps> = ({
   theme,
-  props: { font = 'primary', size = 'md' },
+  props: { font, size },
 }) => {
   const { gridRowHeight } = theme
   const { fontFamily, offsetTop, offsetBottom } = theme.fonts[font]
-  const { fontSize, rowSpan } = theme.text[size!]
-  const lineHeight = gridRowHeight * rowSpan
+  const fontSize = gridRowHeight * theme.text[size].fontSize
+  const lineHeight = gridRowHeight * theme.text[size].lineHeight
   const lineHeightSpace = (lineHeight - fontSize) / 2
   const marginTop = -(offsetTop * fontSize + 1 + lineHeightSpace)
   const marginBottom = -(offsetBottom * fontSize + 1 + lineHeightSpace)
@@ -34,7 +33,12 @@ const defaultTextStyles: StyleResolver<Theme, TextStyleProps> = ({
   }
 }
 
-export const Text: React.FC<TextProps> = ({ children, font, size, styles }) => {
+export const Text: React.FC<TextProps> = ({
+  children,
+  font = 'primary',
+  size = 'md',
+  styles,
+}) => {
   const style = useStylin(
     ThemeContext,
     { font, size },
@@ -47,3 +51,5 @@ export const Text: React.FC<TextProps> = ({ children, font, size, styles }) => {
     </div>
   )
 }
+
+Text.displayName = 'Text'

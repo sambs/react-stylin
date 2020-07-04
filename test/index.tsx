@@ -7,11 +7,6 @@ export const theme = {
     primary: 'red',
     secondary: 'green',
   },
-  size: {
-    1: '2px',
-    2: '4px',
-    3: '8px',
-  },
   text: {
     lg: {
       fontSize: '24px',

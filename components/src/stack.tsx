@@ -4,7 +4,6 @@ import { Theme, ThemeContext } from './theme'
 
 type StackStyleProps = {
   spacing?: number
-  // spacing: keyof Theme['size']
 }
 
 type StackProps = StackStyleProps & {
