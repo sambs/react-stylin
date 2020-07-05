@@ -1,8 +1,8 @@
-import { createStylinElement } from 'stylin'
+import { createStylinComponent } from 'stylin'
 import { StyleContext } from './context'
 import { px } from './utils'
 
-export const Spacer = createStylinElement({
+export const Spacer = createStylinComponent({
   element: 'div',
   displayName: 'Spacer',
   context: StyleContext,

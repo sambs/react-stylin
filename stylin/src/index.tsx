@@ -25,22 +25,20 @@ export function useStylin<C, P extends StyleParams>(
   return style
 }
 
-type ElementName = keyof JSX.IntrinsicElements
-
 type StylinElementProps<
-  E extends ElementName,
+  E extends React.ElementType,
   C,
   P extends StyleParams
-> = JSX.IntrinsicElements[E] & {
+> = React.ComponentProps<E> & {
   styles?: StyleResolver<C, P>
 } & Partial<P>
 
 type CreateStylinElementParams<
-  E extends ElementName,
+  E extends React.ElementType,
   C,
   P extends StyleParams
 > = {
-  defaultProps?: JSX.IntrinsicElements[E]
+  defaultProps?: React.ComponentProps<E>
   defaultStyles?: StyleResolver<C, P>
   defaultStyleProps?: P
   displayName?: string
@@ -48,21 +46,21 @@ type CreateStylinElementParams<
   context: React.Context<C>
 }
 
-export const createStylinElement = <
-  E extends ElementName,
+export const createStylinComponent = <
+  E extends React.ElementType,
   C,
   P extends StyleParams
 >({
   defaultProps,
   defaultStyles,
   defaultStyleProps,
-  displayName = 'Element',
+  displayName = 'StylinComponent',
   element,
   context,
 }: CreateStylinElementParams<E, C, P>) => {
   const component: React.FC<StylinElementProps<E, C, P>> = (props) => {
     const styleProps: Partial<P> = {}
-    const elemProps: JSX.IntrinsicElements[E] = {}
+    const elemProps: Partial<React.ComponentProps<E>> = {}
 
     for (const prop in defaultStyleProps) {
       if (prop in props) {

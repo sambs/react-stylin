@@ -1,7 +1,7 @@
-import { createStylinElement } from 'stylin'
+import { createStylinComponent } from 'stylin'
 import { StyleContext } from './context'
 
-export const GridRowGuide = createStylinElement({
+export const GridRowGuide = createStylinComponent({
   element: 'div',
   displayName: 'GridRowGuide',
   context: StyleContext,

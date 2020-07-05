@@ -1,8 +1,8 @@
-import { createStylinElement } from 'stylin'
+import { createStylinComponent } from 'stylin'
 import { StyleContext } from './context'
 import { px } from './utils'
 
-export const Stack = createStylinElement({
+export const Stack = createStylinComponent({
   element: 'div',
   displayName: 'Stack',
   context: StyleContext,

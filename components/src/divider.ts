@@ -1,7 +1,7 @@
-import { createStylinElement } from 'stylin'
+import { createStylinComponent } from 'stylin'
 import { StyleContext } from './context'
 
-export const Divider = createStylinElement({
+export const Divider = createStylinComponent({
   element: 'hr',
   displayName: 'Divider',
   context: StyleContext,
