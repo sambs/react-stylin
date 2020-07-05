@@ -1,18 +1,60 @@
-import { createStylinElement } from 'stylin'
+import React from 'react'
+import { useStylin, StyleResolver } from 'stylin'
 import { ThemeContext, Theme } from './theme'
+import { useFocusState, useHoverState } from './utils'
 
-export const Button = createStylinElement({
-  element: 'button',
-  displayName: 'Button',
-  themeContext: ThemeContext,
-  defaultStyleProps: {
-    variant: 'default' as keyof Theme['buttons'],
-    textSize: 'md' as keyof Theme['text'],
-    font: 'primary' as keyof Theme['fonts'],
-  },
-  defaultStyles: ({ theme: { buttons }, props: { variant } }) => ({
-    border: 0,
-    background: 'none',
-    ...buttons[variant],
-  }),
+type ButtonStyleProps = {
+  variant?: keyof Theme['buttons']
+}
+
+type ButtonState = ButtonStyleProps & { hover: boolean; focus: boolean }
+
+type ButtonProps = ButtonStyleProps &
+  JSX.IntrinsicElements['button'] & {
+    styles?: ButtonStyleResolver
+  }
+
+type ButtonStyleResolver = StyleResolver<Theme, ButtonState>
+
+const defaultButtonStyles: ButtonStyleResolver = ({
+  theme: { buttons },
+  props: { variant },
+}) => ({
+  border: 0,
+  background: 'none',
+  cursor: 'pointer',
+  ...buttons[variant],
 })
+
+export const Button: React.FC<ButtonProps> = ({
+  onBlur,
+  onFocus,
+  onMouseEnter,
+  onMouseLeave,
+  styles,
+  variant = 'default',
+  ...props
+}) => {
+  const [hover, hoverHandlers] = useHoverState<HTMLButtonElement>({
+    onMouseEnter,
+    onMouseLeave,
+  })
+  const [focus, focusHandlers] = useFocusState<HTMLButtonElement>({
+    onBlur,
+    onFocus,
+  })
+  const style = useStylin(
+    ThemeContext,
+    { focus, hover, variant },
+    defaultButtonStyles,
+    styles
+  )
+  return React.createElement('button', {
+    style,
+    ...hoverHandlers,
+    ...focusHandlers,
+    ...props,
+  })
+}
+
+Button.displayName = 'Button'

@@ -21,7 +21,11 @@ const App = () => (
         __html: `
           * {
             box-sizing: border-box;
-          }`,
+          }
+          *:focus {
+            outline: none;
+          }
+          `,
       }}
     />
     <GridRowGuide disabled>
@@ -45,9 +49,13 @@ const App = () => (
           </Text>
           <Row align="middle" spacing={2}>
             <Button
-              styles={({ theme, defaults }) => ({
+              styles={({ theme, defaults, props: { focus, hover } }) => ({
                 ...defaults,
                 borderRadius: theme.borderRadius.medium,
+                backgroundColor: hover
+                  ? 'hsl(204, 94%, 40%)'
+                  : 'hsl(204, 94%, 45%)',
+                boxShadow: focus ? '0 0 0 3px rgba(66,153,225,0.6)' : undefined,
               })}
             >
               <Text>Submit</Text>
