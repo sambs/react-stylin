@@ -10,12 +10,12 @@ import {
   Row,
   Stack,
   Text,
-  StyleContext,
+  StyleContextProvider,
   theme,
 } from 'stylin-components'
 
 const App = () => (
-  <StyleContext.Provider value={{ theme }}>
+  <StyleContextProvider theme={theme}>
     <style
       dangerouslySetInnerHTML={{
         __html: `
@@ -67,7 +67,7 @@ const App = () => (
         </Stack>
       </Box>
     </GridRowGuide>
-  </StyleContext.Provider>
+  </StyleContextProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
