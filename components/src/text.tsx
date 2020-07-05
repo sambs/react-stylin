@@ -3,19 +3,19 @@ import { StyleResolver, useStylin } from 'stylin'
 import { StyleContextType, StyleContext, Theme } from './context'
 import { px } from './utils'
 
-type TextStyleProps = {
+export type TextStyleProps = {
   size?: keyof Theme['text']
   font?: keyof Theme['fonts']
 }
 
-type TextProps = TextStyleProps & {
+export type TextProps = TextStyleProps & {
   styles?: StyleResolver<StyleContextType, TextStyleProps>
 }
 
-const defaultTextStyles: StyleResolver<StyleContextType, TextStyleProps> = (
-  { theme },
-  { font, size }
-) => {
+export const defaultTextStyles: StyleResolver<
+  StyleContextType,
+  TextStyleProps
+> = ({ theme }, { font, size }) => {
   const { gridRowHeight } = theme
   const { fontFamily, offsetTop, offsetBottom } = theme.fonts[font]
   const fontSize = gridRowHeight * theme.text[size].fontSize

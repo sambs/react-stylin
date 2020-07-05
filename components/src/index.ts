@@ -1,6 +1,7 @@
 export * from './box'
 export * from './button'
 export * from './divider'
+export * from './heading'
 export * from './link'
 export * from './row'
 export * from './spacer'

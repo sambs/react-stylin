@@ -6,6 +6,7 @@ import {
   Button,
   Divider,
   GridRowGuide,
+  Heading,
   Link,
   Row,
   Stack,
@@ -37,7 +38,7 @@ const App = () => (
         })}
       >
         <Stack spacing={8}>
-          <Text size="xl">Stylin Components Example</Text>
+          <Heading size="xl">Stylin Components Example</Heading>
           <Text>
             Some inspiration has been taken from Braid. A key principle is the
             separation between layout and regular components. Regular components
