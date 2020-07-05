@@ -1,25 +1,25 @@
 import React from 'react'
 import { useStylin, StyleResolver } from 'stylin'
-import { ThemeContext, Theme } from './theme'
+import { StyleContext, StyleContextType, Theme } from './context'
 import { useFocusState, useHoverState } from './utils'
 
 type ButtonStyleProps = {
   variant?: keyof Theme['buttons']
 }
 
-type ButtonState = ButtonStyleProps & { hover: boolean; focus: boolean }
+type ButtonStyleParams = ButtonStyleProps & { hover: boolean; focus: boolean }
 
 type ButtonProps = ButtonStyleProps &
   JSX.IntrinsicElements['button'] & {
     styles?: ButtonStyleResolver
   }
 
-type ButtonStyleResolver = StyleResolver<Theme, ButtonState>
+type ButtonStyleResolver = StyleResolver<StyleContextType, ButtonStyleParams>
 
-const defaultButtonStyles: ButtonStyleResolver = ({
-  theme: { buttons },
-  props: { variant },
-}) => ({
+const defaultButtonStyles: ButtonStyleResolver = (
+  { theme: { buttons } },
+  { variant }
+) => ({
   border: 0,
   background: 'none',
   cursor: 'pointer',
@@ -44,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
     onFocus,
   })
   const style = useStylin(
-    ThemeContext,
+    StyleContext,
     { focus, hover, variant },
     defaultButtonStyles,
     styles

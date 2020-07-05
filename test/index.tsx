@@ -22,21 +22,19 @@ export const theme = {
 
 type Theme = typeof theme
 
-const ThemeContext = React.createContext(theme)
+const Context = React.createContext(theme)
 
 const createRendererWithContext = (component: JSX.Element) =>
-  createRenderer(
-    <ThemeContext.Provider value={theme}>{component}</ThemeContext.Provider>
-  )
+  createRenderer(<Context.Provider value={theme}>{component}</Context.Provider>)
 
 const Alert = createStylinElement({
   element: 'div',
   displayName: 'Alert',
   defaultProps: { role: 'alert' },
-  defaultStyles: ({ theme }) => ({
+  defaultStyles: (theme) => ({
     background: theme.colors.primary,
   }),
-  themeContext: ThemeContext,
+  context: Context,
 })
 
 test('Custom Element with default props', () => {
@@ -55,8 +53,8 @@ const Text = createStylinElement<'div', Theme, TextStyleProps>({
   defaultStyleProps: {
     size: 'md',
   },
-  defaultStyles: ({ theme, props }) => theme.text[props.size],
-  themeContext: ThemeContext,
+  defaultStyles: (theme, props) => theme.text[props.size],
+  context: Context,
 })
 
 test('Custom Element with style props', () => {

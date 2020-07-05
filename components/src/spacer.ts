@@ -1,13 +1,13 @@
 import { createStylinElement } from 'stylin'
-import { ThemeContext } from './theme'
+import { StyleContext } from './context'
 import { px } from './utils'
 
 export const Spacer = createStylinElement({
   element: 'div',
   displayName: 'Spacer',
-  themeContext: ThemeContext,
+  context: StyleContext,
   defaultStyleProps: { size: 1 },
-  defaultStyles: ({ theme, props }) => ({
-    height: px(theme.gridRowHeight * props.size),
+  defaultStyles: ({ theme }, { size }) => ({
+    height: px(theme.gridRowHeight * size),
   }),
 })

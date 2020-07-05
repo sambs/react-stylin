@@ -61,4 +61,6 @@ export const theme = {
 
 export type Theme = typeof theme
 
-export const ThemeContext = React.createContext(theme)
+export type StyleContextType = { theme: Theme }
+
+export const StyleContext = React.createContext({ theme })

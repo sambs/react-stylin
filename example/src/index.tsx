@@ -10,12 +10,12 @@ import {
   Row,
   Stack,
   Text,
-  ThemeContext,
+  StyleContext,
   theme,
 } from 'stylin-components'
 
 const App = () => (
-  <ThemeContext.Provider value={theme}>
+  <StyleContext.Provider value={{ theme }}>
     <style
       dangerouslySetInnerHTML={{
         __html: `
@@ -49,7 +49,7 @@ const App = () => (
           </Text>
           <Row align="middle" spacing={2}>
             <Button
-              styles={({ theme, defaults, props: { focus, hover } }) => ({
+              styles={({ theme }, { focus, hover }, defaults) => ({
                 ...defaults,
                 borderRadius: theme.borderRadius.medium,
                 backgroundColor: hover
@@ -67,7 +67,7 @@ const App = () => (
         </Stack>
       </Box>
     </GridRowGuide>
-  </ThemeContext.Provider>
+  </StyleContext.Provider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))

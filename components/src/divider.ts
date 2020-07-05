@@ -1,10 +1,10 @@
 import { createStylinElement } from 'stylin'
-import { ThemeContext } from './theme'
+import { StyleContext } from './context'
 
 export const Divider = createStylinElement({
   element: 'hr',
   displayName: 'Divider',
-  themeContext: ThemeContext,
+  context: StyleContext,
   defaultStyles: ({ theme }) => ({
     backgroundColor: theme.colors.divider,
     border: 0,

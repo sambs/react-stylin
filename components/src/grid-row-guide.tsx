@@ -1,13 +1,13 @@
 import { createStylinElement } from 'stylin'
-import { ThemeContext } from './theme'
+import { StyleContext } from './context'
 
 export const GridRowGuide = createStylinElement({
   element: 'div',
   displayName: 'GridRowGuide',
-  themeContext: ThemeContext,
+  context: StyleContext,
   defaultStyleProps: { disabled: false },
-  defaultStyles: ({ theme, props }) => ({
-    background: props.disabled
+  defaultStyles: ({ theme }, { disabled }) => ({
+    background: disabled
       ? undefined
       : `repeating-linear-gradient(#fff, #fff ${theme.gridRowHeight}px, #eee ${
           theme.gridRowHeight

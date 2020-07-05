@@ -1,15 +1,15 @@
 import { createStylinElement } from 'stylin'
-import { ThemeContext } from './theme'
+import { StyleContext } from './context'
 import { px } from './utils'
 
 export const Stack = createStylinElement({
   element: 'div',
   displayName: 'Stack',
-  themeContext: ThemeContext,
+  context: StyleContext,
   defaultStyleProps: {
     spacing: 1,
   },
-  defaultStyles: ({ theme: { gridRowHeight }, props: { spacing } }) => ({
+  defaultStyles: ({ theme: { gridRowHeight } }, { spacing }) => ({
     display: 'grid',
     gridRowGap: px(spacing * gridRowHeight),
   }),

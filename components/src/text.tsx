@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleResolver, useStylin } from 'stylin'
-import { Theme, ThemeContext } from './theme'
+import { StyleContextType, StyleContext, Theme } from './context'
 import { px } from './utils'
 
 type TextStyleProps = {
@@ -9,13 +9,13 @@ type TextStyleProps = {
 }
 
 type TextProps = TextStyleProps & {
-  styles?: StyleResolver<Theme, TextStyleProps>
+  styles?: StyleResolver<StyleContextType, TextStyleProps>
 }
 
-const defaultTextStyles: StyleResolver<Theme, TextStyleProps> = ({
-  theme,
-  props: { font, size },
-}) => {
+const defaultTextStyles: StyleResolver<StyleContextType, TextStyleProps> = (
+  { theme },
+  { font, size }
+) => {
   const { gridRowHeight } = theme
   const { fontFamily, offsetTop, offsetBottom } = theme.fonts[font]
   const fontSize = gridRowHeight * theme.text[size].fontSize
@@ -40,7 +40,7 @@ export const Text: React.FC<TextProps> = ({
   styles,
 }) => {
   const style = useStylin(
-    ThemeContext,
+    StyleContext,
     { font, size },
     defaultTextStyles,
     styles

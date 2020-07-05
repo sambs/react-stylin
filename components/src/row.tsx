@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleResolver, useStylin } from 'stylin'
-import { Theme, ThemeContext } from './theme'
+import { StyleContextType, StyleContext } from './context'
 import { px } from './utils'
 
 type RowStyleProps = {
@@ -10,7 +10,7 @@ type RowStyleProps = {
 }
 
 type RowProps = RowStyleProps & {
-  styles?: StyleResolver<Theme, RowStyleProps>
+  styles?: StyleResolver<StyleContextType, RowStyleProps>
 }
 
 const alignMap = {
@@ -19,10 +19,10 @@ const alignMap = {
   bottom: 'flex-end',
 }
 
-const defaultRowStyles: StyleResolver<Theme, RowStyleProps> = ({
-  theme,
-  props: { align, nowrap, spacing },
-}) => ({
+const defaultRowStyles: StyleResolver<StyleContextType, RowStyleProps> = (
+  { theme },
+  { align, nowrap, spacing }
+) => ({
   margin: px(spacing * -0.5 * theme.gridRowHeight - 1),
   display: 'flex',
   alignItems: alignMap[align],
@@ -37,12 +37,12 @@ export const Row: React.FC<RowProps> = ({
   styles,
 }) => {
   const style = useStylin(
-    ThemeContext,
+    StyleContext,
     { align, nowrap, spacing },
     defaultRowStyles,
     styles
   )
-  const theme = React.useContext(ThemeContext)
+  const { theme } = React.useContext(StyleContext)
 
   return (
     <div style={{ padding: '1px' }}>
