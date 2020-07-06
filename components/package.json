@@ -1,9 +1,12 @@
 {
-  "name": "stylin-components",
-  "version": "0.0.0",
+  "name": "@sambs/react-stylin-components",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "depenencies": {
-    "stylin": "*"
+    "@sambs/react-stylin": "*"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
   }
 }

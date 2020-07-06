@@ -14,7 +14,7 @@ import {
   Styler,
   StyleContextProvider,
   theme,
-} from 'stylin-components'
+} from '@sambs/react-stylin-components'
 
 const App = () => (
   <StyleContextProvider theme={theme}>

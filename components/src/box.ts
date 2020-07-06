@@ -1,4 +1,4 @@
-import { createStylinComponent } from 'stylin'
+import { createStylinComponent } from '@sambs/react-stylin'
 import { StyleContext } from './context'
 
 export const Box = createStylinComponent({

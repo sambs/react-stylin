@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStylin, StyleResolver } from 'stylin'
+import { useStylin, StyleResolver } from '@sambs/react-stylin'
 import { StyleContext, StyleContextType } from './context'
 import { TextStyleProps, defaultTextStyles } from './text'
 

@@ -1,4 +1,4 @@
-import { createStylinComponent } from 'stylin'
+import { createStylinComponent } from '@sambs/react-stylin'
 import { StyleContext, Theme } from './context'
 
 export const Link = createStylinComponent({

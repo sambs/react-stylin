@@ -1,12 +1,12 @@
 {
-  "name": "stylin-doc",
-  "version": "0.0.0",
+  "name": "@sambs/react-stylin-example",
+  "version": "0.0.1",
   "dependencies": {
+    "@sambs/react-stylin": "*",
+    "@sambs/react-stylin-components": "*",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "stylin": "*",
-    "stylin-components": "*"
+    "react-dom": "^16.13.1"
   }
 }

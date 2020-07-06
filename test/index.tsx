@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createStyler, createStylinComponent } from 'stylin'
+import { createStyler, createStylinComponent } from '@sambs/react-stylin'
 import { create as createRenderer } from 'react-test-renderer'
 
 export const theme = {

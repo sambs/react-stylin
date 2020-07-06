@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleResolver, useStylin } from 'stylin'
+import { StyleResolver, useStylin } from '@sambs/react-stylin'
 import { StyleContextType, StyleContext, Theme } from './context'
 import { px } from './utils'
 
