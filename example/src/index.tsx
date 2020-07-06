@@ -11,6 +11,7 @@ import {
   Row,
   Stack,
   Text,
+  Styler,
   StyleContextProvider,
   theme,
 } from 'stylin-components'
@@ -64,6 +65,13 @@ const App = () => (
             <Link href="#">
               <Text>Cancel</Text>
             </Link>
+            <Styler
+              styles={({ theme }) => ({
+                color: theme.colors.primary,
+              })}
+            >
+              {(style) => <span style={style}>Red Me</span>}
+            </Styler>
           </Row>
         </Stack>
       </Box>

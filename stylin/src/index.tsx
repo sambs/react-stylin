@@ -95,3 +95,16 @@ export const createStylinComponent = <
 
   return component
 }
+
+export type StylerProps<C> = {
+  children: (style: React.CSSProperties) => JSX.Element
+  styles: StyleResolver<C, {}>
+}
+
+export const createStyler = <C,>(context: React.Context<C>) => {
+  const Styler = ({ children, styles }: StylerProps<C>) => {
+    const style = useStylin(context, {}, styles)
+    return children(style)
+  }
+  return Styler
+}

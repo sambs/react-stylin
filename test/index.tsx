@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createStylinElement } from 'stylin'
+import { createStyler, createStylinComponent } from 'stylin'
 import { create as createRenderer } from 'react-test-renderer'
 
 export const theme = {
@@ -27,7 +27,7 @@ const Context = React.createContext(theme)
 const createRendererWithContext = (component: JSX.Element) =>
   createRenderer(<Context.Provider value={theme}>{component}</Context.Provider>)
 
-const Alert = createStylinElement({
+const Alert = createStylinComponent({
   element: 'div',
   displayName: 'Alert',
   defaultProps: { role: 'alert' },
@@ -37,7 +37,7 @@ const Alert = createStylinElement({
   context: Context,
 })
 
-test('Custom Element with default props', () => {
+test('Component with default props', () => {
   const component = createRendererWithContext(<Alert>Uh Oh!</Alert>)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -47,7 +47,7 @@ type TextStyleProps = {
   size: 'sm' | 'md' | 'lg'
 }
 
-const Text = createStylinElement<'div', Theme, TextStyleProps>({
+const Text = createStylinComponent<'div', Theme, TextStyleProps>({
   element: 'div',
   displayName: 'Text',
   defaultStyleProps: {
@@ -57,7 +57,7 @@ const Text = createStylinElement<'div', Theme, TextStyleProps>({
   context: Context,
 })
 
-test('Custom Element with style props', () => {
+test('Component with style props', () => {
   let component = createRendererWithContext(<Text>Hey there!</Text>)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -70,5 +70,21 @@ test('Custom Element with style props', () => {
     <Text styles={() => ({ fontSize: '15px' })}>Hey there!</Text>
   )
   tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+const Styler = createStyler(Context)
+
+test('Styler', () => {
+  let component = createRendererWithContext(
+    <Styler
+      styles={(theme) => ({
+        color: theme.colors.primary,
+      })}
+    >
+      {(style) => <span style={style}>Red!</span>}
+    </Styler>
+  )
+  let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
