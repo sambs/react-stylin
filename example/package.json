@@ -1,6 +1,6 @@
 {
   "name": "@sambs/react-stylin-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "@sambs/react-stylin": "*",
     "@sambs/react-stylin-components": "*",
