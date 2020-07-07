@@ -12,23 +12,26 @@ import {
   Stack,
   Text,
   Styler,
+  StyleSheet,
   StyleContextProvider,
   theme,
 } from '@sambs/react-stylin-components'
 
 const App = () => (
   <StyleContextProvider theme={theme}>
-    <style
-      dangerouslySetInnerHTML={{
-        __html: `
-          * {
-            box-sizing: border-box;
-          }
-          *:focus {
-            outline: none;
-          }
-          `,
-      }}
+    <StyleSheet
+      styles={({ theme }) => `
+        * {
+          box-sizing: border-box;
+        }
+        *:focus {
+          outline: none;
+        }
+        html {
+          color: ${theme.colors.bodyText};
+          font-family: ${theme.fonts.primary.fontFamily};
+        }
+      `}
     />
     <GridRowGuide disabled>
       <Box
@@ -49,6 +52,17 @@ const App = () => (
           <Text size="sm">
             Sometimes you just want to add a divider like the one above.
           </Text>
+          <Styler
+            styles={({ theme }) => ({
+              color: theme.colors.divider,
+            })}
+          >
+            {(style) => (
+              <span style={style}>
+                I'm an arbitrary element styled by a Styler component.
+              </span>
+            )}
+          </Styler>
           <Row align="middle" spacing={2}>
             <Button
               styles={({ theme }, { focus, hover }, defaults) => ({
@@ -65,13 +79,6 @@ const App = () => (
             <Link href="#">
               <Text>Cancel</Text>
             </Link>
-            <Styler
-              styles={({ theme }) => ({
-                color: theme.colors.primary,
-              })}
-            >
-              {(style) => <span style={style}>Red Me</span>}
-            </Styler>
           </Row>
         </Stack>
       </Box>

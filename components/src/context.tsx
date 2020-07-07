@@ -17,8 +17,7 @@ export const theme = {
     },
   },
   colors: {
-    primary: 'red',
-    secondary: 'green',
+    bodyText: '#333',
     divider: '#eee',
   },
   text: {

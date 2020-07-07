@@ -49,6 +49,20 @@ exports[`Component with style props 3`] = `
 </div>
 `;
 
+exports[`StyleSheeet 1`] = `
+<style
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "
+        body {
+          color: red;
+        }
+      ",
+    }
+  }
+/>
+`;
+
 exports[`Styler 1`] = `
 <span
   style={

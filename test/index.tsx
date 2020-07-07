@@ -1,6 +1,11 @@
 import * as React from 'react'
-import { createStyler, createStylinComponent } from '@sambs/react-stylin'
 import { create as createRenderer } from 'react-test-renderer'
+
+import {
+  createStyler,
+  createStylinComponent,
+  createStyleSheet,
+} from '@sambs/react-stylin'
 
 export const theme = {
   colors: {
@@ -84,6 +89,22 @@ test('Styler', () => {
     >
       {(style) => <span style={style}>Red!</span>}
     </Styler>
+  )
+  let tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+const StyleSheet = createStyleSheet(Context)
+
+test('StyleSheeet', () => {
+  let component = createRendererWithContext(
+    <StyleSheet
+      styles={(theme) => `
+        body {
+          color: ${theme.colors.primary};
+        }
+      `}
+    />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
