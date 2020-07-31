@@ -52,11 +52,11 @@ type TextStyleProps = {
   size: 'sm' | 'md' | 'lg'
 }
 
-const Text = createStylinComponent<'div', Theme, TextStyleProps>({
+const Text = createStylinComponent({
   element: 'div',
   displayName: 'Text',
   defaultStyleProps: {
-    size: 'md',
+    size: 'md' as TextStyleProps['size'],
   },
   defaultStyles: (theme, props) => theme.text[props.size],
   context: Context,
@@ -72,7 +72,7 @@ test('Component with style props', () => {
   expect(tree).toMatchSnapshot()
 
   component = createRendererWithContext(
-    <Text styles={() => ({ fontSize: '15px' })}>Hey there!</Text>
+    <Text styles={({ colors }) => ({ color: colors.primary })}>Hey there!</Text>
   )
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()
