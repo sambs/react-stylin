@@ -3,6 +3,7 @@
   "scripts": {
     "build": "tsc --build",
     "bundle": "rollup --config rollup.config.js",
+    "clean": "rm -rf */build && rm -rf */dist && rm */tsconfig.tsbuildinfo",
     "start": "serve example",
     "test": "jest"
   },
