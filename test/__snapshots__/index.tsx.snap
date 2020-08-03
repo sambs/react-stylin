@@ -13,6 +13,18 @@ exports[`Component with default props 1`] = `
 </div>
 `;
 
+exports[`Component with ref forwarding 1`] = `
+<div
+  style={
+    Object {
+      "fontSize": "16px",
+    }
+  }
+>
+  3
+</div>
+`;
+
 exports[`Component with style props 1`] = `
 <div
   style={
@@ -41,7 +53,7 @@ exports[`Component with style props 3`] = `
 <div
   style={
     Object {
-      "fontSize": "15px",
+      "color": "red",
     }
   }
 >

@@ -25,8 +25,6 @@ export const theme = {
   },
 }
 
-type Theme = typeof theme
-
 const Context = React.createContext(theme)
 
 const createRendererWithContext = (component: JSX.Element) =>
@@ -75,6 +73,17 @@ test('Component with style props', () => {
     <Text styles={({ colors }) => ({ color: colors.primary })}>Hey there!</Text>
   )
   tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+const ForwardRefTest: React.FC<{ count: number }> = ({ count }) => {
+  const textRef = React.useRef<HTMLDivElement>(null)
+  return <Text innerRef={textRef}>{count}</Text>
+}
+
+test('Component with ref forwarding', () => {
+  let component = createRendererWithContext(<ForwardRefTest count={3} />)
+  let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
 

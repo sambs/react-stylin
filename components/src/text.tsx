@@ -9,6 +9,7 @@ export type TextStyleProps = {
 }
 
 export type TextProps = TextStyleProps & {
+  children?: React.ReactNode
   styles?: StyleResolver<StyleContextType, TextStyleProps>
 }
 
@@ -33,23 +34,20 @@ export const defaultTextStyles: StyleResolver<
   }
 }
 
-export const Text: React.FC<TextProps> = ({
-  children,
-  font = 'primary',
-  size = 'md',
-  styles,
-}) => {
-  const style = useStylin(
-    StyleContext,
-    { font, size },
-    defaultTextStyles,
-    styles
-  )
-  return (
-    <div style={{ padding: '1px 0' }}>
-      <div style={style}>{children}</div>
-    </div>
-  )
-}
+export const Text = React.forwardRef<HTMLDivElement, TextProps>(
+  ({ children, font = 'primary', size = 'md', styles }, ref) => {
+    const style = useStylin(
+      StyleContext,
+      { font, size },
+      defaultTextStyles,
+      styles
+    )
+    return (
+      <div style={{ padding: '1px 0' }} ref={ref}>
+        <div style={style}>{children}</div>
+      </div>
+    )
+  }
+)
 
 Text.displayName = 'Text'
