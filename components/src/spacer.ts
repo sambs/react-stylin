@@ -1,8 +1,8 @@
-import { createStylinComponent } from '@sambs/react-stylin'
+import { createStylinElement } from '@sambs/react-stylin'
 import { StyleContext } from './context'
 import { px } from './utils'
 
-export const Spacer = createStylinComponent({
+export const Spacer = createStylinElement({
   element: 'div',
   displayName: 'Spacer',
   context: StyleContext,

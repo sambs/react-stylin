@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Context, createRendererWithContext } from './utils'
+import { createStylinElement } from '@sambs/react-stylin'
 
-import { createStylinComponent } from '@sambs/react-stylin'
-
-const Alert = createStylinComponent({
+const Alert = createStylinElement({
   element: 'div',
   displayName: 'Alert',
   defaultProps: { role: 'alert' },
@@ -13,7 +12,7 @@ const Alert = createStylinComponent({
   context: Context,
 })
 
-test('Component with default props', () => {
+test('Element with default props', () => {
   const component = createRendererWithContext(<Alert>Uh Oh!</Alert>)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -23,7 +22,7 @@ type TextStyleProps = {
   size: 'sm' | 'md' | 'lg'
 }
 
-const Text = createStylinComponent({
+const Text = createStylinElement({
   element: 'div',
   displayName: 'Text',
   defaultStyleProps: {
@@ -33,7 +32,7 @@ const Text = createStylinComponent({
   context: Context,
 })
 
-test('Component with style props', () => {
+test('Element with style props', () => {
   let component = createRendererWithContext(<Text>Hey there!</Text>)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -54,7 +53,7 @@ const ForwardRefTest: React.FC<{ count: number }> = ({ count }) => {
   return <Text innerRef={textRef}>{count}</Text>
 }
 
-test('Component with ref forwarding', () => {
+test('Element with ref forwarding', () => {
   let component = createRendererWithContext(<ForwardRefTest count={3} />)
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

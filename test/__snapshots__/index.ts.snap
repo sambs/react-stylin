@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component with default props 1`] = `
+exports[`Element with default props 1`] = `
 <div
   role="alert"
   style={
@@ -13,7 +13,7 @@ exports[`Component with default props 1`] = `
 </div>
 `;
 
-exports[`Component with ref forwarding 1`] = `
+exports[`Element with ref forwarding 1`] = `
 <div
   style={
     Object {
@@ -25,7 +25,7 @@ exports[`Component with ref forwarding 1`] = `
 </div>
 `;
 
-exports[`Component with style props 1`] = `
+exports[`Element with style props 1`] = `
 <div
   style={
     Object {
@@ -37,7 +37,7 @@ exports[`Component with style props 1`] = `
 </div>
 `;
 
-exports[`Component with style props 2`] = `
+exports[`Element with style props 2`] = `
 <div
   style={
     Object {
@@ -49,7 +49,7 @@ exports[`Component with style props 2`] = `
 </div>
 `;
 
-exports[`Component with style props 3`] = `
+exports[`Element with style props 3`] = `
 <div
   style={
     Object {
