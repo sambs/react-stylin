@@ -1,34 +1,7 @@
 import * as React from 'react'
-import { create as createRenderer } from 'react-test-renderer'
+import { Context, createRendererWithContext } from './utils'
 
-import {
-  createStyler,
-  createStylinComponent,
-  createStyleSheet,
-} from '@sambs/react-stylin'
-
-export const theme = {
-  colors: {
-    primary: 'red',
-    secondary: 'green',
-  },
-  text: {
-    lg: {
-      fontSize: '24px',
-    },
-    md: {
-      fontSize: '16px',
-    },
-    sm: {
-      fontSize: '12px',
-    },
-  },
-}
-
-const Context = React.createContext(theme)
-
-const createRendererWithContext = (component: JSX.Element) =>
-  createRenderer(<Context.Provider value={theme}>{component}</Context.Provider>)
+import { createStylinComponent } from '@sambs/react-stylin'
 
 const Alert = createStylinComponent({
   element: 'div',
@@ -83,38 +56,6 @@ const ForwardRefTest: React.FC<{ count: number }> = ({ count }) => {
 
 test('Component with ref forwarding', () => {
   let component = createRendererWithContext(<ForwardRefTest count={3} />)
-  let tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
-})
-
-const Styler = createStyler(Context)
-
-test('Styler', () => {
-  let component = createRendererWithContext(
-    <Styler
-      styles={(theme) => ({
-        color: theme.colors.primary,
-      })}
-    >
-      {(style) => <span style={style}>Red!</span>}
-    </Styler>
-  )
-  let tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
-})
-
-const StyleSheet = createStyleSheet(Context)
-
-test('StyleSheeet', () => {
-  let component = createRendererWithContext(
-    <StyleSheet
-      styles={(theme) => `
-        body {
-          color: ${theme.colors.primary};
-        }
-      `}
-    />
-  )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
