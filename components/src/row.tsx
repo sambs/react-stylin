@@ -19,10 +19,10 @@ const alignMap = {
   bottom: 'flex-end',
 }
 
-const defaultRowStyles: StyleResolver<StyleContextType, RowStyleProps> = (
-  { theme },
-  { align, nowrap, spacing }
-) => ({
+const defaultRowStyles: StyleResolver<
+  StyleContextType,
+  Required<RowStyleProps>
+> = ({ theme }, { align, nowrap, spacing }) => ({
   margin: px(spacing * -0.5 * theme.gridRowHeight - 1),
   display: 'flex',
   alignItems: alignMap[align],

@@ -15,7 +15,7 @@ export type TextProps = TextStyleProps & {
 
 export const defaultTextStyles: StyleResolver<
   StyleContextType,
-  TextStyleProps
+  Required<TextStyleProps>
 > = ({ theme }, { font, size }) => {
   const { gridRowHeight } = theme
   const { fontFamily, offsetTop, offsetBottom } = theme.fonts[font]

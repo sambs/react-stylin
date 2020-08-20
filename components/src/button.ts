@@ -14,7 +14,10 @@ type ButtonProps = ButtonStyleProps &
     styles?: ButtonStyleResolver
   }
 
-type ButtonStyleResolver = StyleResolver<StyleContextType, ButtonStyleParams>
+type ButtonStyleResolver = StyleResolver<
+  StyleContextType,
+  Required<ButtonStyleParams>
+>
 
 const defaultButtonStyles: ButtonStyleResolver = (
   { theme: { buttons } },

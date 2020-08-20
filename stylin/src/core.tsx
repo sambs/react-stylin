@@ -4,13 +4,13 @@ export type StyleParams = { [prop: string]: any }
 
 export type StyleResolver<C, P extends StyleParams> = (
   context: C,
-  params: Required<P>,
+  params: P,
   defaults: React.CSSProperties
 ) => React.CSSProperties
 
 export function useStylin<C, P extends StyleParams>(
   context: React.Context<C>,
-  params: Required<P>,
+  params: P,
   ...resolvers: Array<StyleResolver<C, P> | undefined>
 ) {
   const contextValue = React.useContext(context)
