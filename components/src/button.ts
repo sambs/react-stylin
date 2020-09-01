@@ -3,20 +3,20 @@ import { useStylin, StyleResolver } from '@sambs/react-stylin'
 import { Theme } from './context'
 import { useFocusState, useHoverState } from './utils'
 
-type ButtonStyleProps = {
+export type ButtonProps = JSX.IntrinsicElements['button'] & {
+  styles?: ButtonStyleResolver
   variant?: keyof Theme['buttons']
 }
 
-type ButtonStyleParams = ButtonStyleProps & { hover: boolean; focus: boolean }
+export type ButtonStyleParams = {
+  hover: boolean
+  focus: boolean
+  variant: keyof Theme['buttons']
+}
 
-type ButtonProps = ButtonStyleProps &
-  JSX.IntrinsicElements['button'] & {
-    styles?: ButtonStyleResolver
-  }
+export type ButtonStyleResolver = StyleResolver<ButtonStyleParams>
 
-type ButtonStyleResolver = StyleResolver<Required<ButtonStyleParams>>
-
-const defaultButtonStyles: ButtonStyleResolver = (
+export const buttonStyles: ButtonStyleResolver = (
   { theme: { buttons } },
   { variant }
 ) => ({
@@ -31,7 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
   onFocus,
   onMouseEnter,
   onMouseLeave,
-  styles,
+  styles = buttonStyles,
   variant = 'default',
   ...props
 }) => {
@@ -43,11 +43,9 @@ export const Button: React.FC<ButtonProps> = ({
     onBlur,
     onFocus,
   })
-  const style = useStylin(
-    { focus, hover, variant },
-    defaultButtonStyles,
-    styles
-  )
+
+  const style = useStylin({ focus, hover, variant }, styles)
+
   return React.createElement('button', {
     style,
     ...hoverHandlers,

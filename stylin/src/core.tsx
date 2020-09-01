@@ -6,27 +6,24 @@ export const StyleContext = React.createContext<StyleContextType>({})
 
 export type StyleParams = { [prop: string]: any }
 
-export type StyleResolver<
-  P extends StyleParams,
-  C extends StyleContextType = StyleContextType
-> = (
-  context: C,
-  params: P,
-  defaults: React.CSSProperties
+export type StyleResolver<P extends StyleParams> = (
+  context: StyleContextType,
+  params: P
 ) => React.CSSProperties
+
+export type Styles<P extends StyleParams> =
+  | React.CSSProperties
+  | StyleResolver<P>
 
 export function useStylin<P extends StyleParams>(
   params: P,
-  ...resolvers: Array<StyleResolver<P> | undefined>
-) {
+  styles: Styles<P>
+): React.CSSProperties {
   const context = React.useContext(StyleContext)
 
-  let style: React.CSSProperties = {}
-
-  for (const resolver of resolvers) {
-    if (resolver) {
-      style = resolver(context, params, style)
-    }
+  if (typeof styles === 'function') {
+    return styles(context, params)
+  } else {
+    return styles
   }
-  return style
 }

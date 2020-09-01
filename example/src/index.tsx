@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Styler, StyleSheet } from '@sambs/react-stylin'
+import {
+  StyleResolver,
+  Styler,
+  StyleSheet,
+  mergeStyles,
+} from '@sambs/react-stylin'
 
 import {
   Box,
   Button,
+  ButtonStyleParams,
   Divider,
   GridRowGuide,
   Heading,
@@ -14,8 +20,18 @@ import {
   Stack,
   Text,
   StyleContextProvider,
+  buttonStyles,
   theme,
 } from '@sambs/react-stylin-components'
+
+const submitButtonStyles: StyleResolver<ButtonStyleParams> = mergeStyles([
+  buttonStyles,
+  ({ theme }, { focus, hover }) => ({
+    borderRadius: theme.borderRadius.medium,
+    backgroundColor: hover ? 'hsl(204, 94%, 40%)' : 'hsl(204, 94%, 45%)',
+    boxShadow: focus ? '0 0 0 3px rgba(66,153,225,0.6)' : undefined,
+  }),
+])
 
 const App = () => (
   <StyleContextProvider theme={theme}>
@@ -64,16 +80,7 @@ const App = () => (
             )}
           </Styler>
           <Row align="middle" spacing={2}>
-            <Button
-              styles={({ theme }, { focus, hover }, defaults) => ({
-                ...defaults,
-                borderRadius: theme.borderRadius.medium,
-                backgroundColor: hover
-                  ? 'hsl(204, 94%, 40%)'
-                  : 'hsl(204, 94%, 45%)',
-                boxShadow: focus ? '0 0 0 3px rgba(66,153,225,0.6)' : undefined,
-              })}
-            >
+            <Button styles={submitButtonStyles}>
               <Text>Submit</Text>
             </Button>
             <Link href="#">

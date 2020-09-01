@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { StyleContextType, StyleResolver, useStylin } from './core'
+import { StyleResolver, useStylin } from './core'
 
-export type StylerProps<C extends StyleContextType = StyleContextType> = {
+export type StylerProps = {
   children: (style: React.CSSProperties) => JSX.Element
-  styles: StyleResolver<{}, C>
+  styles: StyleResolver<{}>
 }
 
 export const Styler = ({ children, styles }: StylerProps) => {

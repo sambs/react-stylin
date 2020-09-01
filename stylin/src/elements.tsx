@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleParams, StyleResolver, useStylin } from './core'
+import { StyleParams, Styles, useStylin } from './core'
 
 type Elements = {
   a: HTMLAnchorElement
@@ -132,13 +132,13 @@ type StylinElementProps<
   E extends ElementName,
   P extends StyleParams
 > = ElementProps<E> & {
-  styles?: StyleResolver<P>
+  styles?: Styles<P>
   innerRef?: React.Ref<Elements[E]>
 } & Partial<P>
 
 type CreateStylinElementParams<E extends ElementName, P extends StyleParams> = {
   defaultProps?: ElementProps<E>
-  defaultStyles?: StyleResolver<P>
+  defaultStyles?: Styles<P>
   defaultStyleProps?: P
   displayName?: string
   element: E
@@ -175,8 +175,7 @@ export const createStylinElement = <
 
     const style = useStylin(
       styleProps as Required<P>,
-      defaultStyles,
-      props.styles
+      props.styles || defaultStyles || {}
     )
 
     return React.createElement(element, {

@@ -18,7 +18,7 @@ const alignMap = {
   bottom: 'flex-end',
 }
 
-const defaultRowStyles: StyleResolver<Required<RowStyleProps>> = (
+export const rowStyles: StyleResolver<Required<RowStyleProps>> = (
   { theme },
   { align, nowrap, spacing }
 ) => ({
@@ -33,9 +33,9 @@ export const Row: React.FC<RowProps> = ({
   align = 'middle',
   nowrap = false,
   spacing = 1,
-  styles,
+  styles = rowStyles,
 }) => {
-  const style = useStylin({ align, nowrap, spacing }, defaultRowStyles, styles)
+  const style = useStylin({ align, nowrap, spacing }, styles)
   const { theme } = React.useContext(StyleContext)
 
   return (
