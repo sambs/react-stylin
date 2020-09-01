@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyleContext } from '@sambs/react-stylin'
 
 const borderRadius = {
   small: '2px',
@@ -61,17 +62,13 @@ export const theme = {
 
 export type Theme = typeof theme
 
-export type StyleContextType = {
-  theme: Theme
-  screenWidth: number
-  breakpoint: number
+declare module '@sambs/react-stylin' {
+  export interface StyleContextType {
+    theme: Theme
+    screenWidth: number
+    breakpoint: number
+  }
 }
-
-export const StyleContext = React.createContext({
-  theme,
-  screenWidth: 320,
-  breakpoint: 0,
-})
 
 export const StyleContextProvider: React.FC<{ theme: Theme }> = ({
   children,

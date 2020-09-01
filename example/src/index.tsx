@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { Styler, StyleSheet } from '@sambs/react-stylin'
+
 import {
   Box,
   Button,
@@ -11,8 +13,6 @@ import {
   Row,
   Stack,
   Text,
-  Styler,
-  StyleSheet,
   StyleContextProvider,
   theme,
 } from '@sambs/react-stylin-components'

@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { createStyleSheet } from '@sambs/react-stylin'
-import { Context, createRendererWithContext } from './utils'
-
-const StyleSheet = createStyleSheet(Context)
+import { StyleSheet } from '@sambs/react-stylin'
+import { createRendererWithContext } from './utils'
 
 test('StyleSheeet', () => {
   let component = createRendererWithContext(
     <StyleSheet
-      styles={(theme) => `
+      styles={({ theme }) => `
         body {
           color: ${theme.colors.primary};
         }

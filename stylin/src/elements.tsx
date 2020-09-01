@@ -130,29 +130,22 @@ type ElementProps<E extends ElementName> = Omit<
 
 type StylinElementProps<
   E extends ElementName,
-  C,
   P extends StyleParams
 > = ElementProps<E> & {
-  styles?: StyleResolver<C, P>
+  styles?: StyleResolver<P>
   innerRef?: React.Ref<Elements[E]>
 } & Partial<P>
 
-type CreateStylinElementParams<
-  E extends ElementName,
-  C,
-  P extends StyleParams
-> = {
+type CreateStylinElementParams<E extends ElementName, P extends StyleParams> = {
   defaultProps?: ElementProps<E>
-  defaultStyles?: StyleResolver<C, P>
+  defaultStyles?: StyleResolver<P>
   defaultStyleProps?: P
   displayName?: string
   element: E
-  context: React.Context<C>
 }
 
 export const createStylinElement = <
   E extends ElementName,
-  C,
   P extends StyleParams
 >({
   defaultProps,
@@ -160,9 +153,8 @@ export const createStylinElement = <
   defaultStyleProps,
   displayName = 'StylinElement',
   element,
-  context,
-}: CreateStylinElementParams<E, C, P>) => {
-  const Element: React.FC<StylinElementProps<E, C, P>> = (props) => {
+}: CreateStylinElementParams<E, P>) => {
+  const Element: React.FC<StylinElementProps<E, P>> = (props) => {
     const styleProps: Partial<P> = {}
     const elemProps: Partial<React.ComponentProps<E>> = {}
 
@@ -182,7 +174,6 @@ export const createStylinElement = <
     }
 
     const style = useStylin(
-      context,
       styleProps as Required<P>,
       defaultStyles,
       props.styles

@@ -1,7 +1,26 @@
 import * as React from 'react'
 import { create as createRenderer } from 'react-test-renderer'
+import { StyleContext } from '@sambs/react-stylin'
 
-export const theme = {
+interface Theme {
+  colors: {
+    primary: string
+    secondary: string
+  }
+  text: {
+    lg: {
+      fontSize: string
+    }
+    md: {
+      fontSize: string
+    }
+    sm: {
+      fontSize: string
+    }
+  }
+}
+
+export const theme: Theme = {
   colors: {
     primary: 'red',
     secondary: 'green',
@@ -19,7 +38,13 @@ export const theme = {
   },
 }
 
-export const Context = React.createContext(theme)
+declare module '@sambs/react-stylin' {
+  export interface StyleContextType {
+    theme: Theme
+  }
+}
 
 export const createRendererWithContext = (component: JSX.Element) =>
-  createRenderer(<Context.Provider value={theme}>{component}</Context.Provider>)
+  createRenderer(
+    <StyleContext.Provider value={{ theme }}>{component}</StyleContext.Provider>
+  )

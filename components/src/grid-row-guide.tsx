@@ -1,10 +1,8 @@
 import { createStylinElement } from '@sambs/react-stylin'
-import { StyleContext } from './context'
 
 export const GridRowGuide = createStylinElement({
   element: 'div',
   displayName: 'GridRowGuide',
-  context: StyleContext,
   defaultStyleProps: { disabled: false },
   defaultStyles: ({ theme }, { disabled }) => ({
     background: disabled

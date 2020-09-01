@@ -1,15 +1,14 @@
 import * as React from 'react'
-import { Context, createRendererWithContext } from './utils'
+import { createRendererWithContext } from './utils'
 import { createStylinElement } from '@sambs/react-stylin'
 
 const Alert = createStylinElement({
   element: 'div',
   displayName: 'Alert',
   defaultProps: { role: 'alert' },
-  defaultStyles: (theme) => ({
+  defaultStyles: ({ theme }) => ({
     background: theme.colors.primary,
   }),
-  context: Context,
 })
 
 test('Element with default props', () => {
@@ -28,8 +27,7 @@ const Text = createStylinElement({
   defaultStyleProps: {
     size: 'md' as TextStyleProps['size'],
   },
-  defaultStyles: (theme, props) => theme.text[props.size],
-  context: Context,
+  defaultStyles: ({ theme }, props) => theme.text[props.size],
 })
 
 test('Element with style props', () => {
@@ -42,7 +40,9 @@ test('Element with style props', () => {
   expect(tree).toMatchSnapshot()
 
   component = createRendererWithContext(
-    <Text styles={({ colors }) => ({ color: colors.primary })}>Hey there!</Text>
+    <Text styles={({ theme }) => ({ color: theme.colors.primary })}>
+      Hey there!
+    </Text>
   )
   tree = component.toJSON()
   expect(tree).toMatchSnapshot()

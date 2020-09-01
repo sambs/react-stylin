@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleResolver, useStylin } from '@sambs/react-stylin'
-import { StyleContextType, StyleContext, Theme } from './context'
+import { Theme } from './context'
 import { px } from './utils'
 
 export type TextStyleProps = {
@@ -10,13 +10,13 @@ export type TextStyleProps = {
 
 export type TextProps = TextStyleProps & {
   children?: React.ReactNode
-  styles?: StyleResolver<StyleContextType, TextStyleProps>
+  styles?: StyleResolver<TextStyleProps>
 }
 
-export const defaultTextStyles: StyleResolver<
-  StyleContextType,
-  Required<TextStyleProps>
-> = ({ theme }, { font, size }) => {
+export const defaultTextStyles: StyleResolver<Required<TextStyleProps>> = (
+  { theme },
+  { font, size }
+) => {
   const { gridRowHeight } = theme
   const { fontFamily, offsetTop, offsetBottom } = theme.fonts[font]
   const fontSize = gridRowHeight * theme.text[size].fontSize
@@ -36,12 +36,7 @@ export const defaultTextStyles: StyleResolver<
 
 export const Text = React.forwardRef<HTMLDivElement, TextProps>(
   ({ children, font = 'primary', size = 'md', styles }, ref) => {
-    const style = useStylin(
-      StyleContext,
-      { font, size },
-      defaultTextStyles,
-      styles
-    )
+    const style = useStylin({ font, size }, defaultTextStyles, styles)
     return (
       <div style={{ padding: '1px 0' }} ref={ref}>
         <div style={style}>{children}</div>

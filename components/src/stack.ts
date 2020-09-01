@@ -1,11 +1,9 @@
 import { createStylinElement } from '@sambs/react-stylin'
-import { StyleContext } from './context'
 import { px } from './utils'
 
 export const Stack = createStylinElement({
   element: 'div',
   displayName: 'Stack',
-  context: StyleContext,
   defaultStyleProps: {
     spacing: 1,
   },
