@@ -1,8 +1,9 @@
 {
   "name": "@sambs/react-stylin",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "files": ["dist"],
   "peerDependencies": {
     "react": "^16.13.1"
